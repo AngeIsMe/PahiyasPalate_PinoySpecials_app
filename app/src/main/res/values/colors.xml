@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#FEE9D6</color>
+    <color name="secondary">#ECA766</color>
+    <color name="secTrans">#CDECA766</color>
+    <color name="tertiary">#5A352C</color>
+</resources>

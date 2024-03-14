@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="250dp"
-        android:layout_height="240dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:elevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView_recipe"
-                android:layout_width="200dp"
-                android:layout_height="150dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/primary"
-                android:src="@drawable/boylogro" />
 
             <TextView
                 android:id="@+id/tv_recipename"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView_recipe"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="75dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="Name"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_category"
@@ -49,30 +42,57 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_recipename"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="95dp"
-                android:layout_marginTop="-7dp"
-                android:text="Category" />
+                android:textSize="15sp"
+                android:layout_marginTop="4dp"
+                android:text="Category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.082"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recipename" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="description"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_category" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_category"
-                android:layout_marginTop="5dp"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="5dp">
+                android:layout_marginStart="70dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tv_recipename"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
 
                 <ImageView
-                    android:layout_gravity="center_vertical"
                     android:layout_width="20dp"
                     android:layout_height="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:src="@drawable/ic_eyes" />
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_eyes"
+                    tools:layout_editor_absoluteX="196dp"
+                    tools:layout_editor_absoluteY="174dp" />
 
                 <TextView
                     android:id="@+id/tv_viewsCount"
-                    android:text="0"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    tools:layout_editor_absoluteX="194dp"
+                    tools:layout_editor_absoluteY="181dp" />
 
             </LinearLayout>
 
@@ -82,12 +102,15 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_category"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="-4dp"
-                android:layout_marginEnd="15dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_bookmark" />
+                android:src="@drawable/ic_bookmark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </RelativeLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

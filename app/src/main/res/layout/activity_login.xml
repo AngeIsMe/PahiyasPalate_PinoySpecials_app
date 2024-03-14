@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context=".activity.Login">
 
     <TextView
@@ -43,29 +44,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <EditText
-            android:id="@+id/unameLogET"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:background="@drawable/et_custom"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/unameinputlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:hint="Username"
-            android:paddingStart="10dp"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/passLogET"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/et_custom"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/unameLogET"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Password"
-            android:paddingStart="10dp"
+             android:layout_marginTop="10dp"
+            android:background="@drawable/et_custom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/unameLogET" />
+            app:layout_constraintTop_toBottomOf="@+id/unameinputlayout"
+            app:passwordToggleContentDescription="Show/Hide Password"
+            app:passwordToggleDrawable="@drawable/ic_eye"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/passLogET"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/unameLogET" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <TextView
             android:id="@+id/textView5"
@@ -74,7 +98,7 @@
             android:layout_marginTop="10dp"
             android:text="Don't have an account?"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passLogET" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout" />
 
         <TextView
             android:id="@+id/registerTV"
@@ -86,7 +110,7 @@
             android:text="Register"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@id/passLogET" />
+            app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout" />
 
         <Button
             android:id="@+id/logBTN"

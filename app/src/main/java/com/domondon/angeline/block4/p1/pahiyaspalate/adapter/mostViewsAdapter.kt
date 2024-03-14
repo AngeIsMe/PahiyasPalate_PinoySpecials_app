@@ -16,32 +16,23 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.domondon.angeline.block4.p1.pahiyaspalate.R
 import com.domondon.angeline.block4.p1.pahiyaspalate.activity.RecipeView
-import com.domondon.angeline.block4.p1.pahiyaspalate.domain.topTenDomain
+import com.domondon.angeline.block4.p1.pahiyaspalate.domain.ViewsDomain
 import com.domondon.angeline.block4.p1.pahiyaspalate.view_model.RecipeViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
-class topTenAdapter(private val context: Context, private val viewModel: RecipeViewModel) : RecyclerView.Adapter<topTenAdapter.RecipeViewHolder>() {
+class mostViewsAdapter(private val context: Context, private val viewModel: RecipeViewModel) : RecyclerView.Adapter<mostViewsAdapter.RecipeViewHolder>()  {
 
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recipe_name: TextView = itemView.findViewById(R.id.tv_recipename)
         val recipe_category: TextView = itemView.findViewById(R.id.tv_category)
         val views: TextView = itemView.findViewById(R.id.tv_viewsCount)
-        val recipedescription: TextView = itemView.findViewById(R.id.tv_description)
     }
 
-    init {
-        viewModel.recipes.observeForever { recipes ->
-            recipes?.let {
-                setData(it)
-            }
-        }
-    }
+    private var viewsList: List<ViewsDomain> = emptyList()
 
-    private var recipes: List<topTenDomain> = emptyList()
-
-    fun setData(topten: List<topTenDomain>) {
-        this.recipes = topten
+    fun setData(viewsList: List<ViewsDomain>) {
+        this.viewsList = viewsList
         notifyDataSetChanged()
     }
 
@@ -51,36 +42,35 @@ class topTenAdapter(private val context: Context, private val viewModel: RecipeV
     }
 
     override fun getItemCount(): Int {
-        return recipes.size
+        return viewsList.size
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val currentRecipe = recipes[position]
+        val currentView = viewsList[position]
 
-        holder.recipe_name.text = currentRecipe.name
-        holder.recipe_category.text = currentRecipe.category
-        holder.views.text = currentRecipe.views
-        holder.recipedescription.text = currentRecipe.recipe_description
+        holder.recipe_name.text = currentView.name
+        holder.recipe_category.text = currentView.category
+        holder.views.text = currentView.views
 
         // Inside onBindViewHolder of your adapter
         holder.itemView.setOnClickListener {
             // Get the clicked item position
-            val adapterPosition = holder.adapterPosition
-            if (adapterPosition != RecyclerView.NO_POSITION) {
-                // Get the corresponding recipe object
-                val recipe = recipes[adapterPosition]
+            val position = holder.adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                // Get the corresponding view object
+                val view = viewsList[position]
 
-                incrementViewsCount(recipe.id)
+                incrementViewsCount(view.id)
 
                 // Start the RecipeView activity and pass necessary data
                 val intent = Intent(context, RecipeView::class.java).apply {
-                    putExtra("id", recipe.id)
-                    putExtra("recipe_name", recipe.name)
-                    putExtra("category", recipe.category)
-                    putExtra("recipe_description", recipe.recipe_description)
-                    putExtra("steps", recipe.steps)
-                    putExtra("ingredients", recipe.ingredients)
-                    putExtra("views", recipe.views)
+                    putExtra("id", view.id)
+                    putExtra("recipe_name", view.name)
+                    putExtra("category", view.category)
+                    putExtra("recipe_description", view.recipe_description)
+                    putExtra("steps", view.steps)
+                    putExtra("ingredients", view.ingredients)
+                    putExtra("views", view.views)
                 }
                 context.startActivity(intent)
             }
@@ -116,4 +106,5 @@ class topTenAdapter(private val context: Context, private val viewModel: RecipeV
         // Add the request to the request queue
         queue.add(request)
     }
+
 }

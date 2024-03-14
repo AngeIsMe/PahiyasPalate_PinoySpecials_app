@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getDataFromDatabase() {
-        val url = "http://192.168.1.16/TestApp/get.php"
+        val url = "http://192.168.1.16/Final-PS/get.php"
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
         val request = object : StringRequest(
@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity() {
         // Define a StringRequest to make a GET request
         val request = StringRequest(
             Request.Method.GET, url,
-            Response.Listener<String> { response ->
+            { response ->
                 try {
                     // Parse JSON response
                     val jsonObject = JSONObject(response)
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             },
-            Response.ErrorListener { error ->
+            { error ->
                 // Handle errors
                 Toast.makeText(this@MainActivity, "Fail to get response = $error", Toast.LENGTH_SHORT).show()
             })

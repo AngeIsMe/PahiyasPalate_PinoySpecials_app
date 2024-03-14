@@ -1,9 +1,6 @@
 package com.domondon.angeline.block4.p1.pahiyaspalate.domain;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-
-public class topTenDomain {
+public class ViewsDomain {
 
     private String name;
     private String category;
@@ -78,7 +75,7 @@ public class topTenDomain {
 
 
 
-    public topTenDomain(String id,String name, String category, String recipe_description, String steps,String ingredients, String views){
+    public ViewsDomain(String id,String name, String category, String recipe_description, String steps,String ingredients, String views){
         this.id = id;
         this.name = name;
         this.category = category;

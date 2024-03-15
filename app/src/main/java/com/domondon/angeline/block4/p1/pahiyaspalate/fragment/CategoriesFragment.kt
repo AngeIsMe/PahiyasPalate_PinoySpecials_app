@@ -25,6 +25,7 @@ import com.domondon.angeline.block4.p1.pahiyaspalate.adapter.SnacksAdapter
 import com.domondon.angeline.block4.p1.pahiyaspalate.domain.BreakfastDomain
 import com.domondon.angeline.block4.p1.pahiyaspalate.domain.DinnerDomain
 import com.domondon.angeline.block4.p1.pahiyaspalate.domain.LunchDomain
+import com.domondon.angeline.block4.p1.pahiyaspalate.domain.SnacksDomain
 import org.json.JSONArray
 import org.json.JSONException
 
@@ -71,9 +72,15 @@ class CategoriesFragment : Fragment() {
         dinnerRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         dinnerRecycler.adapter = dinnerAdapter
 
+        snacksRecycler = view.findViewById(R.id.snacks_rc)
+        snacksAdapter = SnacksAdapter()
+        snacksRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        snacksRecycler.adapter = snacksAdapter
+
         getBreakfastCategory()
         getLunchCategory()
         getDinnerCategory()
+        getSnacksCategory()
     }
 
     private fun getBreakfastCategory()
@@ -216,5 +223,52 @@ class CategoriesFragment : Fragment() {
     {
         dinnerAdapter.setData(recipes)
         dinnerAdapter.notifyDataSetChanged()
+    }
+    private fun getSnacksCategory()
+    {
+        val url = "https://pinoyspecials-app.pinoyspecialsrecipe.online/api/snacks"
+        val queue: RequestQueue = Volley.newRequestQueue(context)
+
+        val request = object : StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                Log.d("Response", "Response: $response")
+                try {
+                    val jsonArray = JSONArray(response)
+                    val recipes = mutableListOf<SnacksDomain>()
+
+                    for (i in 0 until jsonArray.length()) {
+                        val recipeObject = jsonArray.getJSONObject(i)
+                        val id = recipeObject.getString("id")
+                        val name = recipeObject.getString("recipe_name")
+                        val category = recipeObject.getString("category")
+                        val recipeDescription = recipeObject.getString("recipe_description")
+                        val steps = recipeObject.getString("steps")
+                        val ingredients = recipeObject.getString("ingredients")
+                        val views = recipeObject.getString("views")
+
+                        val recipe = SnacksDomain(id, name, category, recipeDescription, steps, ingredients, views)
+                        recipes.add(recipe)
+                    }
+                    updateAdapterWithDataSnacks(recipes)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(context, "Fail to get response = $error", Toast.LENGTH_SHORT).show()
+                Log.e("Error", "Volley error: $error")
+            }) {
+            override fun getBodyContentType(): String {
+                return "application/x-www-form-urlencoded; charset=UTF-8"
+            }
+        }
+
+        queue.add(request)
+    }
+    private fun updateAdapterWithDataSnacks(recipes: MutableList<SnacksDomain>)
+    {
+        snacksAdapter.setData(recipes)
+        snacksAdapter.notifyDataSetChanged()
     }
 }

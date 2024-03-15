@@ -119,11 +119,7 @@ class AddRecipeFragment : Fragment() {
                 params["ingredients"] = ingredients
                 return params
             }
-
         }
         queue.add(request)
     }
-
-
-
 }

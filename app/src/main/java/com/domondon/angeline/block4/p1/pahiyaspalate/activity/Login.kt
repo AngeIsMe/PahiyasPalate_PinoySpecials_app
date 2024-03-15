@@ -51,7 +51,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun authenticateUser(username: String, password: String) {
-        val url = "https://pinoyspecials-app.pinoyspecialsrecipe.online/api/check"
+        val url = "https://pinoyspecials-app.pinoyspecialsrecipe.online/api/login"
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
         val request = object : StringRequest(

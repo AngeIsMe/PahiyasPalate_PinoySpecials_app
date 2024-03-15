@@ -2,18 +2,60 @@ package com.domondon.angeline.block4.p1.pahiyaspalate.domain;
 
 public class SnacksDomain {
     private String name;
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     private String category;
+    private String steps;
+    private String ingredients;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+
+    public String getViews() {
+        return views;
+    }
+
+    public void setViews(String views) {
+        this.views = views;
+    }
+
+    public String views;
+
+    public String getRecipe_description() {
+        return recipe_description;
+    }
+
+    public void setRecipe_description(String recipe_description) {
+        this.recipe_description = recipe_description;
+    }
+
+    private String recipe_description;
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
+    }
+
 
     public String getName() {
+
         return name;
     }
 
@@ -21,9 +63,24 @@ public class SnacksDomain {
         this.name = name;
     }
 
-    public SnacksDomain(String name, String category){
+    public String getCategory() {
 
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+
+    public SnacksDomain(String id,String name, String category, String recipe_description, String steps,String ingredients, String views){
+        this.id = id;
         this.name = name;
         this.category = category;
+        this.recipe_description = recipe_description;
+        this.steps = steps;
+        this.ingredients = ingredients;
+        this.views = views;
     }
 }

@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/recipe_image_view"
+                        android:id="@+id/showImage"
                         android:src="@drawable/margarita"
                         android:layout_width="match_parent"
                         android:layout_height="220dp"/>
@@ -93,7 +93,7 @@
 
                         <ImageView
                             android:id="@+id/userimageView"
-                            android:background="@color/secondary"
+                            android:src="@drawable/baseline_person_24"
                             android:layout_width="50dp"
                             android:layout_height="50dp"/>
 
@@ -109,8 +109,8 @@
 
                         <ImageView
                             android:id="@+id/viewIcon"
-                            android:background="@color/secTrans"
-                            android:layout_width="50dp"
+                            android:src="@drawable/ic_eyes"
+                            android:layout_width="30dp"
                             android:layout_height="match_parent"/>
 
                         <TextView
@@ -123,9 +123,11 @@
                             android:layout_height="match_parent"/>
 
                         <ImageView
-                            android:layout_marginStart="10dp"
-                            android:background="@color/secTrans"
-                            android:layout_width="40dp"
+                            android:id="@+id/bookmarkBtn"
+                            android:layout_marginStart="15dp"
+                            android:src="@drawable/ic_bookmark"
+                            android:layout_width="50dp"
+                            android:padding="10dp"
                             android:layout_height="match_parent"/>
                     </LinearLayout>
 
@@ -183,13 +185,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:id="@+id/showIngredients"
-                            android:paddingStart="20dp"
-                            android:text="Ingredients recipe"
-                            android:layout_margin="5dp"
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"/>
+                            android:layout_height="150dp">
+
+                            <ListView
+                                android:id="@+id/ingredientsListView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
                             android:text="Steps"
@@ -199,13 +207,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:id="@+id/showSteps"
-                            android:paddingStart="20dp"
-                            android:text="Steps recipe"
-                            android:layout_margin="5dp"
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"/>
+                            android:layout_height="250dp">
+
+                            <ListView
+                                android:id="@+id/stepsListView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     </LinearLayout>
 

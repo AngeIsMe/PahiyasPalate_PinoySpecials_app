@@ -1,10 +1,22 @@
 package com.domondon.angeline.block4.p1.pahiyaspalate.domain;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
+import org.json.JSONArray;
+
 public class SnacksDomain {
+
+    private String id;
     private String name;
     private String category;
+    private String recipe_description;
+    private String level;
+    private String author;
     private String steps;
     private String ingredients;
+    private String views;
+    private String imageUrl; // Add image URL field
 
     public String getId() {
         return id;
@@ -14,17 +26,21 @@ public class SnacksDomain {
         this.id = id;
     }
 
-    private String id;
-
-    public String getViews() {
-        return views;
+    public String getName() {
+        return name;
     }
 
-    public void setViews(String views) {
-        this.views = views;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String views;
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getRecipe_description() {
         return recipe_description;
@@ -34,16 +50,21 @@ public class SnacksDomain {
         this.recipe_description = recipe_description;
     }
 
-    private String recipe_description;
-
-    public String getIngredients() {
-        return ingredients;
+    public String getLevel() {
+        return level;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getSteps() {
         return steps;
@@ -53,34 +74,40 @@ public class SnacksDomain {
         this.steps = steps;
     }
 
-
-    public String getName() {
-
-        return name;
+    public String getIngredients() {
+        return ingredients;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public String getCategory() {
-
-        return category;
+    public String getViews() {
+        return views;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setViews(String views) {
+        this.views = views;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-    public SnacksDomain(String id,String name, String category, String recipe_description, String steps,String ingredients, String views){
+    public SnacksDomain(String id, String name, String category, String recipe_description, String level, String steps, String ingredients, String views, String author, String imageUrl) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.recipe_description = recipe_description;
+        this.level = level;
+        this.author = author;
         this.steps = steps;
         this.ingredients = ingredients;
         this.views = views;
+        this.imageUrl = imageUrl; // Assign the image URL
     }
 }

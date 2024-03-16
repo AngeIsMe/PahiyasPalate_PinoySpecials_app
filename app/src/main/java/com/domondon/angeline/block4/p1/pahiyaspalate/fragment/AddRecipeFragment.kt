@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
@@ -31,6 +32,7 @@ class AddRecipeFragment : Fragment() {
     private lateinit var Input_recipe_steps: EditText
     private lateinit var Input_recipe_ingredients: EditText
     private lateinit var submit: Button
+    private lateinit var display_username: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +47,7 @@ class AddRecipeFragment : Fragment() {
         Input_recipe_description = view.findViewById(R.id.recipe_description)
         Input_recipe_steps = view.findViewById(R.id.steps)
         Input_recipe_ingredients = view.findViewById(R.id.ingredients)
+        display_username = view.findViewById(R.id.user_name)
         submit = view.findViewById(R.id.submit)
 
         return view
@@ -52,6 +55,8 @@ class AddRecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val user = SharedPrefManager.getInstance(requireContext()).getUser()
+        display_username.text = user.username
 
         submit.setOnClickListener {
             // Retrieve input values

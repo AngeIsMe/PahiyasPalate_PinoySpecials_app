@@ -1,5 +1,6 @@
 package com.domondon.angeline.block4.p1.pahiyaspalate.activity
 
+import SharedPrefManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -11,8 +12,9 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.domondon.angeline.block4.p1.pahiyaspalate.R
+import com.domondon.angeline.block4.p1.pahiyaspalate.model.User
+import com.domondon.angeline.block4.p1.pahiyaspalate.volley.SingletonVolley
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -22,10 +24,14 @@ class Login : AppCompatActivity() {
     private lateinit var passwordLogin: EditText
     private lateinit var registerActivity: TextView
     private lateinit var loginBTN: Button
+    private lateinit var sharedPrefManager: SharedPrefManager
+    private lateinit var requestQueue: RequestQueue
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        sharedPrefManager = SharedPrefManager(this)
+        requestQueue = SingletonVolley.getRequestQueue(this)
 
         registerActivity = findViewById(R.id.registerTV)
         unameLogin = findViewById(R.id.unameLogET)
@@ -51,29 +57,30 @@ class Login : AppCompatActivity() {
     }
 
     private fun authenticateUser(username: String, password: String) {
-        val url = "https://pinoyspecials-app.pinoyspecialsrecipe.online/api/login"
-        val queue: RequestQueue = Volley.newRequestQueue(this)
+        val url = "https://pinoyspecials.pinoyspecialsrecipe.online/api/auth"
 
         val request = object : StringRequest(
             Request.Method.POST, url,
             Response.Listener<String> { response ->
                 try {
                     val jsonObject = JSONObject(response)
-                    val error = jsonObject.optBoolean("error", false) // Default value in case key is missing or not a boolean
-                    val message = jsonObject.getString("message")
+                    val error = jsonObject.optBoolean("error", false)
+                    val message = jsonObject.optString("message", "Authentication failed")
 
                     if (!error) {
-                        // Authentication successful, navigate to home activity
-                        val intent = Intent(this@Login, BottomNavBar::class.java)
-                        startActivity(intent)
-                        finish()
+                        val userJson = jsonObject.getJSONObject("data")
+                        val userId = userJson.getInt("id")
+                        val userName = userJson.getString("username")
+                        val email = userJson.getString("email")
+                        val user = User(userId, userName, email)
+                        SharedPrefManager.getInstance(applicationContext).userLogin(user)
+                        navigateToHome()
                     } else {
-                        // Authentication failed, display error message
-                        Toast.makeText(this@Login, message, Toast.LENGTH_SHORT).show()
+                        displayErrorMessage(message)
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                    Toast.makeText(this@Login, "JSON parsing error", Toast.LENGTH_SHORT).show()
+                    displayErrorMessage("JSON parsing error")
                 }
             },
             Response.ErrorListener { error ->
@@ -90,6 +97,16 @@ class Login : AppCompatActivity() {
                 return params
             }
         }
-        queue.add(request)
+        requestQueue.add(request)
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this@Login, BottomNavBar::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun displayErrorMessage(message: String) {
+        Toast.makeText(this@Login, message, Toast.LENGTH_SHORT).show()
     }
 }

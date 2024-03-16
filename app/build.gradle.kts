@@ -53,6 +53,7 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.activity:activity-ktx:1.3.0")
     implementation("androidx.fragment:fragment-ktx:1.3.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
 
     //retrofit dependencies

@@ -70,42 +70,45 @@ class topTenAdapter(private val context: Context, private val viewModel: RecipeV
                 // Get the corresponding recipe object
                 val recipe = recipes[adapterPosition]
 
-                incrementViewsCount(recipe.id)
-
                 // Start the RecipeView activity and pass necessary data
                 val intent = Intent(context, RecipeView::class.java).apply {
                     putExtra("id", recipe.id)
                     putExtra("recipe_name", recipe.name)
                     putExtra("category", recipe.category)
                     putExtra("recipe_description", recipe.recipe_description)
-                    putExtra("steps", recipe.steps)
-                    putExtra("ingredients", recipe.ingredients)
-                    putExtra("views", recipe.views)
+                    putExtra("views_count", recipe.views)
+                    putExtra("username",recipe.author)
+                    putExtra("steps",recipe.steps)
+                    putExtra("ingredients",recipe.ingredients)
+                    putExtra("recipe_image", recipe.imageUrl)
                 }
                 context.startActivity(intent)
+
+                // Increment views_count for the clicked recipe
+                incrementViewsCount(recipe.id)
             }
         }
     }
 
     private fun incrementViewsCount(recipeId: String) {
         val queue: RequestQueue = Volley.newRequestQueue(context)
-        val url = "https://pinoyspecials-app.pinoyspecialsrecipe.online/api/recipe/$recipeId/increment-views"
+        val url = "https://pinoyspecials.pinoyspecialsrecipe.online/api/show/$recipeId"
 
         val request = object : StringRequest(
-            Request.Method.POST, url,
+            Request.Method.GET, url,
             Response.Listener<String> { response ->
                 // Handle the response if needed
                 Log.d("TAG", "Response is $response")
                 try {
                     val jsonObject = JSONObject(response)
-                    Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, jsonObject.getString("success"), Toast.LENGTH_SHORT).show()
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             },
             Response.ErrorListener { error ->
                 // Handle errors if any
-                Toast.makeText(context, "Failed to increment views: $error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Failed to view Recipe: $error", Toast.LENGTH_SHORT).show()
             }) {
             // Override the getBodyContentType method to set the content type
             override fun getBodyContentType(): String {
@@ -116,4 +119,6 @@ class topTenAdapter(private val context: Context, private val viewModel: RecipeV
         // Add the request to the request queue
         queue.add(request)
     }
+
+
 }

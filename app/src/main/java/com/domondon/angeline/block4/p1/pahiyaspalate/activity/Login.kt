@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -23,7 +24,7 @@ class Login : AppCompatActivity() {
     private lateinit var unameLogin: EditText
     private lateinit var passwordLogin: EditText
     private lateinit var registerActivity: TextView
-    private lateinit var loginBTN: Button
+    private lateinit var loginBTN: AppCompatButton
     private lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var requestQueue: RequestQueue
 

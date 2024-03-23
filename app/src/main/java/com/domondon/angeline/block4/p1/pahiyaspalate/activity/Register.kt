@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -24,7 +25,7 @@ class Register : AppCompatActivity() {
     private lateinit var passwordET: EditText
     private lateinit var confirmPassET: EditText
     private lateinit var loginTV: TextView
-    private lateinit var registerBTN: Button
+    private lateinit var registerBTN: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +65,7 @@ class Register : AppCompatActivity() {
     }
 
     private fun addUserToDatabase(username: String, email: String, password: String) {
-        val url = "https://pinoyspecials-app.pinoyspecialsrecipe.online/api/create"
+        val url = "https://pinoyspecials.pinoyspecialsrecipe.online/api/users-create"
         val queue: RequestQueue = Volley.newRequestQueue(this)
 
         val request = object : StringRequest(

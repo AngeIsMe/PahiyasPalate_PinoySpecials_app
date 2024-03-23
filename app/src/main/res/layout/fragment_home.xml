@@ -232,12 +232,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:padding="10dp"
+                    android:background="@color/primary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv1">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_top"
+                        android:background="@color/primary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -263,12 +265,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:padding="10dp"
+                    android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv2">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rc_mostview"
+                        android:background="@color/primary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp" />
